@@ -6,9 +6,10 @@
   - [Setup](#setup)
   - [Environment Variables](#environment-variables)
   - [Running Locally](#running-locally)
+  - [Test Locally](#test-locally)
 - [Google Cloud Platform Deployment](#google-cloud-platform-deployment)
   - [Setup Google Cloud CLI](#setup-google-cloud-cli)
-  - [Deploy Cloud Function](#deploy-cloud-function)
+  - [Deploy Cloud Functions](#deploy-cloud-functions)
 - [API Connection Test](#api-connection-test)
 
 ## Local Development
@@ -51,7 +52,7 @@ npm run dev
 Start another local server and emulates the Google Cloud Functions runtime, exposing your graphqlHandler function at http://localhost:8080.
 
 ```
-npm run server
+npm run start
 ```
 
 Open a new terminal window and use curl or any GraphQL client to send a POST request to your local server:
@@ -100,9 +101,9 @@ Make sure that your project was set:
 gcloud functions list
 ```
 
-## Deploy Cloud Function
+## Deploy Cloud Functions
 
-Deploy your Cloud Function to Google Cloud Platform:
+Deploy your Cloud Functions to Google Cloud Platform:
 
 ```
 gcloud functions deploy graphqlHandler \
@@ -112,7 +113,7 @@ gcloud functions deploy graphqlHandler \
   --set-env-vars MONGODB_CONNECTION_STRING=your_mongodb_connection_string
 ```
 
-## API Connection Test
+## API Connection Test on Cloud Functions
 
 Make sure your current IP address is whitelisted on your Atlas cluster. Otherwise, it could not connect to any servers in your MongoDB Atlas cluster.
 
@@ -122,4 +123,4 @@ curl -X POST https://REGION-PROJECT_ID.cloudfunctions.net/graphqlHandler \
   -d '{"query":"mutation { createPost(title: \"Test Post\", content: \"This is a test post.\") { title, content } }"}' \
 ```
 
-Replace REGION and PROJECT_ID with the actual values for your Google Cloud project, and ensure the correct path for the Cloud Function endpoint (graphqlHandler in this case).
+Replace REGION and PROJECT_ID with the actual values for your Google Cloud project, and ensure the correct path for the Cloud Functions endpoint (graphqlHandler in this case).

@@ -34,7 +34,7 @@ const resolvers = {
         const post = new Post({ title, content });
         await post.save();
 
-        return post; // Return the created post
+        return post;
       } catch (error) {
         console.error("Error creating post:", error);
         throw new Error("Error creating post");
